@@ -32,9 +32,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     private GoogleApiClient mGoogleApiClient;
     private GoogleMap googleMap;
-
     private BroadcastReceiver yourReceiver;
     private static final String ACTION_GPS = "android.location.PROVIDERS_CHANGED";
+    LocationManager mLocationManager;
+    //Location myLocation = getLastKnownLocation();
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,20 +52,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 .build();
     }
 
-    private void buildAlertMessageNoGps() {
-        Context context = getApplicationContext();
-        CharSequence text = "Por favor habilita el GPS para poder ubicarte";
-        int duration = Toast.LENGTH_LONG;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-    }
-
     @Override
     public void onMapReady(GoogleMap map) {
-        //map.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
         googleMap = map;
-
         createMarkers();
         getLastKnownLocation(googleMap);
     }
@@ -150,8 +140,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         registerReceiverGPS();
     }
 
-    LocationManager mLocationManager;
-    //Location myLocation = getLastKnownLocation();
+    /**
+     **  CUSTOM METHODS
+     **/
     private Location getLastKnownLocation(GoogleMap googleMap) {
         mLocationManager = (LocationManager)getApplicationContext().getSystemService(LOCATION_SERVICE);
         List<String> providers = mLocationManager.getProviders(true);
@@ -177,7 +168,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }
         return bestLocation;
     }
-
 
     private void checkGPS() {
         /*
@@ -213,5 +203,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    private void buildAlertMessageNoGps() {
+        Context context = getApplicationContext();
+        CharSequence text = "Por favor habilita el GPS para poder ubicarte...";
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 }
