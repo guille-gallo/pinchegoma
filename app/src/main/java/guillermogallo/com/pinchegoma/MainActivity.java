@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public void onLocationChanged(Location location) {
         /*
         * -Ver ventana para cuadras a elegir, ver cálculo distancia.
-        * -Sacar login activity,
         *
         * */
 
