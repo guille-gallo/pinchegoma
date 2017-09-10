@@ -7,6 +7,9 @@ import android.content.IntentFilter;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
+import static guillermogallo.com.pinchegoma.R.id.frame_container;
 import static guillermogallo.com.pinchegoma.R.id.map;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private static final String ACTION_GPS = "android.location.PROVIDERS_CHANGED";
     LocationManager mLocationManager;
     //Location myLocation = getLastKnownLocation();
+    Fragment fragment ;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +55,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
+
+        FragmentManager fm = getSupportFragmentManager();
+        fragment = fm.findFragmentById(frame_container);
+        if (fragment == null) {
+            FragmentTransaction ft = fm.beginTransaction();
+            fragment = new Selector_cuadrasFragment();
+            ft.add(android.R.id.content,fragment,"myFragmentTag");
+            ft.commit();
+        }
     }
 
     @Override
