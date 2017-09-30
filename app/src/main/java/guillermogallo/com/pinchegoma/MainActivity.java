@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.initial_map);
+        //setContentView(R.layout.initial_map);
 
         /*SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(map);
@@ -58,13 +58,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             ft.commit();
         }*/
 
-        /*setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new ExampleItemFragment())
                     .commit();
-        }*/
+        }
     }
 
     @Override

@@ -2,6 +2,9 @@ package guillermogallo.com.pinchegoma;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +26,16 @@ public class ExampleItemFragment extends Fragment{
         exampleListItemList.add(new ExampleListItem("Example 1"));
         exampleListItemList.add(new ExampleListItem("Example 2"));
         exampleListItemList.add(new ExampleListItem("Example 3"));
-        //mAdapter = new ExampleListAdapter(getActivity(), exampleListItemList);
+        ExampleListAdapter mAdapter = new ExampleListAdapter(getActivity(), exampleListItemList);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        View myFragmentView = inflater.inflate(R.layout.example_list_item, container, false);
+
+        return myFragmentView;
     }
 
     /*@Override
